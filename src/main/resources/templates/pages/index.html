@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <title>Index</title>
+    <style>
+        .col-2{
+            margin-top: 2%;
+        }
+        /*.col-10 {*/
+        /*    margin-top: 1%;*/
+        /*}*/
+    </style>
+</head>
+<body class="text-center">
+<header>
+    <div class="container-fluid bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#"><h4><span sec:authentication="principal.email"></span></h4></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active text-white-50">
+                        <h5>
+                            with roles:
+                            <span sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                               ADMIN
+                            </span>
+                            <span sec:authorize="hasAnyRole('ROLE_USER')">
+                                USER
+                            </span>
+                        </h5>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-md-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<h1>Index</h1>
+
+<!--таблица юзеров-->
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-2">
+            <div class="list-group">
+                <a href="/admin" sec:authorize="hasRole('ROLE_ADMIN')" class="list-group-item list-group-item-action"
+                   aria-current="true">Admin</a>
+                <a href="/user" sec:authorize="hasRole('ROLE_USER')" class="list-group-item list-group-item-action">User</a>
+            </div>
+        </div>
+        <div class="col-10 p-5 mb-2 bg-light">
+            <h1>Admin panel</h1>
+            <div class="tabbable" id="tabs-769031">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active show" href="#nav-home" data-toggle="tab">Users table</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nav-profile" data-toggle="tab">New User</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="panel-557610">
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                    </div>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="tab-content">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <b>All Users</b>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-striped border" id="mainTableWithUsers1">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Age</th>
+                                                <th>Role</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="tab-content">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <b>Add new user</b>
+                                    </div>
+                                    <div class="card-body" align="center">
+
+                                        <div class="newUser">
+                                            <form id="defaultSomeForm1">
+                                                <div class="form-group">
+                                                    <label for="exampleInputName1"><b>First Name</b></label>
+                                                    <input type="text"  class="form-control mb-1 col-4"
+                                                           id="exampleInputName1" aria-describedby="nameHelp">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputLast1"><b>Last Name</b></label>
+                                                    <input type="text"  class="form-control mb-1 col-4"
+                                                           id="exampleInputLast1" aria-describedby="lastNameHelp">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1"><b>Email address</b></label>
+                                                    <input type="email"  class="form-control mb-1 col-4"
+                                                           id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputAge"><b>Age</b></label>
+                                                    <input type="number"  class="form-control mb-1 col-4"
+                                                           id="exampleInputAge" aria-describedby="ageHelp">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1"><b>Password</b></label>
+                                                    <input type="password"
+                                                           class="form-control mb-1 col-4"
+                                                           id="exampleInputPassword1">
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label><b>Role</b>
+                                                        <select multiple size="2" name="select_role" class="form-control"
+                                                                id="selectRole">
+                                                            <option name="ROLE_ADMIN" value="1">ADMIN</option>
+                                                            <option name="ROLE_USER" value="2" selected="selected">USER</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <button type="button" class="btn btn-success btn-lg"
+                                                      id="addNewUserButton1" >Add new user</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--скрытое дефолтное модальное окно -->
+<div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+            </div>
+
+            <div class="modal-footer">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="webjars/jquery/3.5.1/jquery.js"></script>
+<script src="webjars/popper.js/1.16.0/umd/popper.js"></script>
+<script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:5px
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <title>All Users</title>
+    <style>
+        .col-2{
+            margin-top: 5%;
+        }
+        .col-10 {
+            margin-top: 3%;
+        }
+    </style>
+</head>
+<body class="text-center">
+<header>
+    <div class="container-fluid bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#"><h4><span sec:authentication="principal.email"></span></h4></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active text-white-50">
+                        <h5>
+                            with roles:
+                            <span sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                               ADMIN
+                            </span>
+                            <span sec:authorize="hasAnyRole('ROLE_USER')">
+                                USER
+                            </span>
+                        </h5>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-md-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div class="list-group">
+                <a href="/admin" sec:authorize="hasRole('ROLE_ADMIN')" class="list-group-item list-group-item-action"
+                   aria-current="true">Admin</a>
+                <a href="/user" sec:authorize="hasRole('ROLE_USER')" class="list-group-item list-group-item-action"
+                   aria-current="true">User</a>
+            </div>
+        </div>
+        <div class="col-10 p-5 mb-2 bg-light">
+            <h1>User information-page</h1>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="admin"
+                       aria-selected="true" href="/user">User table</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <b>About User</b>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped border">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Last Name</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th><span sec:authentication="principal.id"></span></th>
+                                <th><span sec:authentication="principal.name"></span></th>
+                                <th><span sec:authentication="principal.lastName"></span></th>
+                                <th><span sec:authentication="principal.age"></span></th>
+                                <th><span sec:authentication="principal.email"></span></th>
+                                <th><span sec:authentication="principal.authorities"></span></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
