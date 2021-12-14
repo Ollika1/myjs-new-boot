@@ -118,7 +118,7 @@ async function getDefaultModal() {
 // редактируем юзера из модалки редактирования, забираем данные, отправляем
 async function editUser(modal, id) {
     let preuser = await userFetchService.findOneUser(id);
-    let user = preuser.json();
+    let user =  preuser.json();
     modal.find('.modal-title').html('Edit user');
     let editButton = `<button  class="btn btn-info" id="editButton">Edit</button>`;
     let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>`
